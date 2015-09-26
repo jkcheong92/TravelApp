@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MyTravelApp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <!--CurrencyConverter-->
+    <string name="title_activity_currency_converter">CurrencyConverter</string>
+    <string name="currency_title">Convert your currency now!</string>
+    <string name="baseCurrency">From</string>
+    <string name="convertCurrency">To</string>
+    <string name="title_activity_budget">Budget</string>
+</resources>
