@@ -69,11 +69,19 @@
         android:onClick="onClick_convertAmount"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Converted amount"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/textView_convertAmount" />
+        android:id="@+id/textView_convertAmount"
+        android:gravity="center"
+        android:background="#10ADE0"
+        android:padding="20px"/>
+
+        <FrameLayout
+            android:paddingTop="50px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/listFragment"/>
 
 </LinearLayout>

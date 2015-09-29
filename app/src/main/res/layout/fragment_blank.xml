@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="sg.edu.nus.mytravelapp.BlankFragment"
+    android:name="sg.edu.nus.mytravelapp.BlankFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Daily expenses fragment"
+        android:textSize="30dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_food"
+        android:hint="FOOD" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_travel"
+        android:hint="TRAVEL" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_accomodation"
+        android:hint="ACCOMODATION" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_play"
+        android:hint="PLAY" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/editText_shopping"
+        android:hint="SHOPPING" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

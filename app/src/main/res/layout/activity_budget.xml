@@ -25,10 +25,25 @@
         android:id="@+id/button2_save"
         android:onClick="onClick_setBudget" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Expenses"
+        android:id="@+id/button_expenses"
+        android:onClick="onClick_addExpenses" />
+
+    <!--Daily expenses form-->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:id="@+id/frameExpenses" />
+
+    <!--Database records-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4">
+        android:layout_weight="0">
 
         <TextView
             android:layout_marginTop="30dp"

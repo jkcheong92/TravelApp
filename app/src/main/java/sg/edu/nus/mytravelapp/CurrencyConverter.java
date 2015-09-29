@@ -1,5 +1,8 @@
 package sg.edu.nus.mytravelapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,12 +27,20 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
 
-public class CurrencyConverter extends AppCompatActivity {
+public class CurrencyConverter extends AppCompatActivity implements ItemFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_converter);
+
+        // Dynamically attach ItemFragment
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction;
+        fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment popularCurr = new ItemFragment();
+        fragmentTransaction.add(R.id.listFragment, popularCurr);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -54,6 +65,15 @@ public class CurrencyConverter extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onFragmentInteraction(String id) {
+        Toast.makeText(getApplicationContext(), "Converting 1 " + id + " to SGD ...", Toast.LENGTH_SHORT).show();
+
+        // Convert 1 foreign currency to SGD currency
+        MyAsyncTask myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute("http://api.fixer.io/latest?base=" + id);
+    }
+
     public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -67,6 +87,10 @@ public class CurrencyConverter extends AppCompatActivity {
 
             String convertCurrency = convertCurr.getEditableText().toString().toUpperCase();
             String amountCurrency = amountCurr.getEditableText().toString();
+            if (amountCurrency.equals(""))
+                amountCurrency = "1";
+            if (convertCurrency.equals(""))
+                convertCurrency = "SGD";
 
             try {
                 // Convert currency using JSON
