@@ -1,5 +1,8 @@
 package sg.edu.nus.mytravelapp;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -95,6 +98,16 @@ public class Budget extends AppCompatActivity {
         }
 
         myDb.close();
+    }
+
+    // Add daily expenses
+    public void onClick_addExpenses(View view) {
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction;
+        fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment expenseFrag = new BlankFragment();
+        fragmentTransaction.add(R.id.frameExpenses, expenseFrag);
+        fragmentTransaction.commit();
     }
 
     // TODO: Send Broadcast Message when expenses is close to budget
