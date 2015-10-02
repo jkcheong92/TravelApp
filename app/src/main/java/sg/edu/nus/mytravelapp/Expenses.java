@@ -3,12 +3,18 @@ package sg.edu.nus.mytravelapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class Expenses extends AppCompatActivity {
+    MyDB myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +27,8 @@ public class Expenses extends AppCompatActivity {
         Fragment expenseFrag = new BlankFragment();
         fragmentTransaction.add(R.id.frameExpenses, expenseFrag);
         fragmentTransaction.commit();
+
+        myDb = new MyDB(this);
     }
 
     @Override
@@ -43,5 +51,98 @@ public class Expenses extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // Add expenses to database
+    public void onClick_addExpenses(View view) {
+        myDb.open();
+
+        // Fetch budget from user
+        BlankFragment expenseFrag = (BlankFragment) getFragmentManager().findFragmentById(R.id.frameExpenses);
+        Double food = expenseFrag.getFoodCost();
+        Double travel = expenseFrag.getTravelCost();
+        Double accomodation = expenseFrag.getAccomodationCost();
+        Double play = expenseFrag.getPlayCost();
+        Double shopping = expenseFrag.getShoppingCost();
+
+        // Store expenses into DB
+        boolean isInserted = myDb.insertData(food, travel, accomodation, play, shopping, 0);
+        if (isInserted) {
+            Toast.makeText(Expenses.this, "Added expenses!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(Expenses.this, "Please try again", Toast.LENGTH_LONG).show();
+        }
+
+        trackExpenses();
+        myDb.close();
+    }
+
+    public void trackExpenses() {
+        String[] lastBudget = getBudget().get(getBudget().size() - 1);
+        Double foodBudget = Double.parseDouble(lastBudget[1]);
+        Double travelBudget = Double.parseDouble(lastBudget[2]);
+        Double accomodationBudget = Double.parseDouble(lastBudget[3]);
+        Double playBudget = Double.parseDouble(lastBudget[4]);
+        Double shoppingBudget = Double.parseDouble(lastBudget[5]);
+
+        ArrayList<String[]> allExpenses = getExpenses();
+        Double foodExpenses, travelExpenses, accomodationExpenses, playExpenses, shoppingExpenses;
+        foodExpenses = travelExpenses = accomodationExpenses = playExpenses = shoppingExpenses = 0.0;
+        for (int i = 0; i < allExpenses.size(); i++) {
+            String[] totalExpenses = allExpenses.get(i);
+            foodExpenses += Double.parseDouble(totalExpenses[1]);
+            travelExpenses += Double.parseDouble(totalExpenses[2]);
+            accomodationExpenses += Double.parseDouble(totalExpenses[3]);
+            playExpenses += Double.parseDouble(totalExpenses[4]);
+            shoppingExpenses += Double.parseDouble(totalExpenses[5]);
+        }
+
+        if (foodExpenses > foodBudget)
+            Toast.makeText(Expenses.this, "You have exceeded your food budget!", Toast.LENGTH_LONG).show();
+        if (travelExpenses > travelBudget)
+            Toast.makeText(Expenses.this, "You have exceeded your travel budget!", Toast.LENGTH_LONG).show();
+        if (accomodationExpenses > accomodationBudget)
+            Toast.makeText(Expenses.this, "You have exceeded your accomodation budget!", Toast.LENGTH_LONG).show();
+        if (playExpenses > playBudget)
+            Toast.makeText(Expenses.this, "You have exceeded your play budget!", Toast.LENGTH_LONG).show();
+        if (shoppingExpenses > shoppingBudget)
+            Toast.makeText(Expenses.this, "You have exceeded your shopping budget!", Toast.LENGTH_LONG).show();
+
+    }
+
+    // Get budget from DB
+    public ArrayList<String[]> getBudget() {
+        myDb.open();
+
+        Cursor c = myDb.getBudget();
+
+        ArrayList<String[]> records = new ArrayList<String[]>();
+
+        if (c.moveToFirst()) {
+            do {
+                String[] record = {c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6)};
+                records.add(record);
+            } while (c.moveToNext());
+        }
+        myDb.close();
+        return records;
+    }
+
+    // Get expenses from DB
+    public ArrayList<String[]> getExpenses() {
+        myDb.open();
+
+        Cursor c = myDb.getExpenses();
+
+        ArrayList<String[]> records = new ArrayList<String[]>();
+
+        if (c.moveToFirst()) {
+            do {
+                String[] record = {c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6)};
+                records.add(record);
+            } while (c.moveToNext());
+        }
+        myDb.close();
+        return records;
     }
 }
