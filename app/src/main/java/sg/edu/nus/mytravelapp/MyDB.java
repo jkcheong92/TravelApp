@@ -4,8 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
-import android.widget.Toast;
 
 /**
  * Created by Asus on 9/26/2015.
@@ -32,38 +30,52 @@ public class MyDB {
 
     /* METHODS TO WRITE AND QUERY INTO DATABASE */
     // INSERT
-    public boolean insertData(Double cost) {
+    public boolean insertData(Double food, Double travel, Double accomodation, Double play, Double shopping) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(dbHelper.COL_2, cost);
+        initialValues.put(dbHelper.FOOD_COL, food);
+        initialValues.put(dbHelper.TRAVEL_COL, travel);
+        initialValues.put(dbHelper.ACCOMODATION_COL, accomodation);
+        initialValues.put(dbHelper.PLAY_COL, play);
+        initialValues.put(dbHelper.SHOPPING_COL, shopping);
 
-        long result = db.insert(dbHelper.TABLE_NAME, null, initialValues);
+        long result = db.insert(dbHelper.BUDGET_TABLE, null, initialValues);
         if (result == -1)
             return false;
         else
             return true;
     }
 
-    public int updateData(long id, Double cost) {
+    public int updateData(long id, Double food,Double travel, Double accomodation, Double play, Double shopping) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(dbHelper.COL_2, cost);
-        return db.update(dbHelper.TABLE_NAME, initialValues, dbHelper.COL_1 + "=" + id, null);
+        initialValues.put(dbHelper.FOOD_COL, food);
+        initialValues.put(dbHelper.TRAVEL_COL, travel);
+        initialValues.put(dbHelper.ACCOMODATION_COL, accomodation);
+        initialValues.put(dbHelper.PLAY_COL, play);
+        initialValues.put(dbHelper.SHOPPING_COL, shopping);
+
+        return db.update(dbHelper.BUDGET_TABLE, initialValues, dbHelper.ID_COL + "=" + id, null);
     }
 
 
     // QUERY
     public Cursor getAllData() {
-        String[] columns = {dbHelper.COL_1, dbHelper.COL_2};
-        Cursor mCursor = db.query(dbHelper.TABLE_NAME, columns, null, null, null, null, null);
+        String[] columns = {dbHelper.ID_COL, dbHelper.FOOD_COL, dbHelper.TRAVEL_COL, dbHelper.ACCOMODATION_COL, dbHelper.PLAY_COL, dbHelper.SHOPPING_COL};
+        Cursor mCursor = db.query(dbHelper.BUDGET_TABLE, columns, null, null, null, null, null);
 
         return mCursor;
     }
 
     public Cursor getData(long id) {
-        Cursor mCursor = db.query(dbHelper.TABLE_NAME,
+        Cursor mCursor = db.query(dbHelper.BUDGET_TABLE,
                 new String[] {
-                        dbHelper.COL_1,
-                        dbHelper.COL_2},
-                dbHelper.COL_1 + "=" + id,
+                        dbHelper.ID_COL,
+                        dbHelper.FOOD_COL,
+                        dbHelper.TRAVEL_COL,
+                        dbHelper.ACCOMODATION_COL,
+                        dbHelper.PLAY_COL,
+                        dbHelper.SHOPPING_COL
+                },
+                dbHelper.ID_COL + "=" + id,
                 null, null, null, null, null);
 
         if (mCursor != null) {
@@ -74,11 +86,11 @@ public class MyDB {
 
     // DELETE
     public int deleteAllRecords() {
-        int rowNum = db.delete(dbHelper.TABLE_NAME, null, null);
+        int rowNum = db.delete(dbHelper.BUDGET_TABLE, null, null);
         return rowNum;
     }
 
     public int deleteRecord(long id) {
-        return  db.delete(dbHelper.TABLE_NAME, dbHelper.COL_1 + "=" + id, null);
+        return  db.delete(dbHelper.BUDGET_TABLE, dbHelper.ID_COL + "=" + id, null);
     }
 }

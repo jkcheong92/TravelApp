@@ -27,11 +27,16 @@
             android:label="@string/title_activity_budget" >
         </activity>
 
-        <receiver android:name=".PersistentReceiver">
+        <receiver android:name=".PersistentReceiver" >
             <intent-filter>
-                <action android:name="Travellers_Broadcast"/>
+                <action android:name="Travellers_Broadcast" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".Expenses"
+            android:label="@string/title_activity_expenses" >
+        </activity>
     </application>
 
 </manifest>
