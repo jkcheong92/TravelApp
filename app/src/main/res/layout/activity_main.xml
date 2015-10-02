@@ -18,9 +18,17 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Budget"
+        android:text="Set Budget"
         android:id="@+id/button_budget"
         android:layout_gravity="center_horizontal"
         android:onClick="onClick_budget"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Expenses"
+        android:id="@+id/button_expenses"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onClick_addExpenses"/>
 
 </LinearLayout>

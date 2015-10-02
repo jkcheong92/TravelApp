@@ -19,15 +19,22 @@ import android.widget.Toast;
 
 public class Budget extends AppCompatActivity {
     MyDB myDb;
+    FragmentManager fragmentManager = getFragmentManager();
+    FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_budget);
 
+        fragmentTransaction = fragmentManager.beginTransaction();
+        Fragment expenseFrag = new BlankFragment();
+        fragmentTransaction.add(R.id.frameExpenses, expenseFrag);
+        fragmentTransaction.commit();
+
         myDb = new MyDB(this);
         sendBroadcastMessage();
-        getFormattedRecords();
+        // getFormattedRecords();
     }
 
     @Override
@@ -62,7 +69,7 @@ public class Budget extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // Get all records from DB in string format
+    /*// Get all records from DB in string format
     public void getFormattedRecords() {
         TextView budgetRecords = (TextView) findViewById(R.id.textView_database_content);
 
@@ -79,35 +86,31 @@ public class Budget extends AppCompatActivity {
         }
 
         myDb.close();
-
+        Toast.makeText(Budget.this, output, Toast.LENGTH_LONG).show();
         budgetRecords.setText(output);
-    }
+    }*/
 
     // Add budget to database
     public void onClick_setBudget(View view) {
         myDb.open();
 
         // Fetch budget from user
-        EditText budgetText = (EditText) findViewById(R.id.editText_budget);
-        Double budget = Double.parseDouble(budgetText.getEditableText().toString());
+        BlankFragment expenseFrag = (BlankFragment) getFragmentManager().findFragmentById(R.id.frameExpenses);
+        Double food = expenseFrag.getFoodCost();
+        Double travel = expenseFrag.getTravelCost();
+        Double accomodation = expenseFrag.getAccomodationCost();
+        Double play = expenseFrag.getPlayCost();
+        Double shopping = expenseFrag.getShoppingCost();
 
         // Store budget cost into DB
-        boolean isInserted = myDb.insertData(budget);
+        boolean isInserted = myDb.insertData(food, travel, accomodation, play, shopping);
         if (isInserted) {
             Toast.makeText(Budget.this, "Budget Set!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(Budget.this, "Budget NOT Set!", Toast.LENGTH_LONG).show();
         }
 
         myDb.close();
-    }
-
-    // Add daily expenses
-    public void onClick_addExpenses(View view) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction;
-        fragmentTransaction = fragmentManager.beginTransaction();
-        Fragment expenseFrag = new BlankFragment();
-        fragmentTransaction.add(R.id.frameExpenses, expenseFrag);
-        fragmentTransaction.commit();
     }
 
     // TODO: Send Broadcast Message when expenses is close to budget

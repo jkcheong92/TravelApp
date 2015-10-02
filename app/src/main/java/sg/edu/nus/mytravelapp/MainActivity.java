@@ -51,6 +51,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void onClick_addExpenses(View view) {
+        Intent i = new Intent(this, Expenses.class);
+        startActivity(i);
+    }
+
     // TODO: Put this in Map Activity
     public void checkBattery() {
         IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
