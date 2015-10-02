@@ -106,6 +106,26 @@ public class MyDB {
         return mCursor;
     }
 
+    public Cursor getExpenses() {
+        Cursor mCursor = db.query(dbHelper.BUDGET_TABLE,
+                new String[] {
+                        dbHelper.ID_COL,
+                        dbHelper.FOOD_COL,
+                        dbHelper.TRAVEL_COL,
+                        dbHelper.ACCOMODATION_COL,
+                        dbHelper.PLAY_COL,
+                        dbHelper.SHOPPING_COL,
+                        dbHelper.BUDGET_COL
+                },
+                dbHelper.BUDGET_COL + "=" + 0,
+                null, null, null, null, null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
     // DELETE
     public int deleteAllRecords() {
         int rowNum = db.delete(dbHelper.BUDGET_TABLE, null, null);

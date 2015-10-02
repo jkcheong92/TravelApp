@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Budget extends AppCompatActivity {
     MyDB myDb;
     FragmentManager fragmentManager = getFragmentManager();
@@ -94,6 +96,7 @@ public class Budget extends AppCompatActivity {
     public void getBudget() {
         myDb.open();
         String output = "";
+        // TODO: Get only 1 (last) record for budget
         Cursor c = myDb.getBudget();
         if(c.moveToFirst()) {
             do {
