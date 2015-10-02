@@ -30,13 +30,14 @@ public class MyDB {
 
     /* METHODS TO WRITE AND QUERY INTO DATABASE */
     // INSERT
-    public boolean insertData(Double food, Double travel, Double accomodation, Double play, Double shopping) {
+    public boolean insertData(Double food, Double travel, Double accomodation, Double play, Double shopping, int budget) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(dbHelper.FOOD_COL, food);
         initialValues.put(dbHelper.TRAVEL_COL, travel);
         initialValues.put(dbHelper.ACCOMODATION_COL, accomodation);
         initialValues.put(dbHelper.PLAY_COL, play);
         initialValues.put(dbHelper.SHOPPING_COL, shopping);
+        initialValues.put(dbHelper.BUDGET_COL, budget);
 
         long result = db.insert(dbHelper.BUDGET_TABLE, null, initialValues);
         if (result == -1)
@@ -59,7 +60,7 @@ public class MyDB {
 
     // QUERY
     public Cursor getAllData() {
-        String[] columns = {dbHelper.ID_COL, dbHelper.FOOD_COL, dbHelper.TRAVEL_COL, dbHelper.ACCOMODATION_COL, dbHelper.PLAY_COL, dbHelper.SHOPPING_COL};
+        String[] columns = {dbHelper.ID_COL, dbHelper.FOOD_COL, dbHelper.TRAVEL_COL, dbHelper.ACCOMODATION_COL, dbHelper.PLAY_COL, dbHelper.SHOPPING_COL, dbHelper.BUDGET_COL};
         Cursor mCursor = db.query(dbHelper.BUDGET_TABLE, columns, null, null, null, null, null);
 
         return mCursor;
@@ -73,9 +74,30 @@ public class MyDB {
                         dbHelper.TRAVEL_COL,
                         dbHelper.ACCOMODATION_COL,
                         dbHelper.PLAY_COL,
-                        dbHelper.SHOPPING_COL
+                        dbHelper.SHOPPING_COL,
+                        dbHelper.BUDGET_COL
                 },
                 dbHelper.ID_COL + "=" + id,
+                null, null, null, null, null);
+
+        if (mCursor != null) {
+            mCursor.moveToFirst();
+        }
+        return mCursor;
+    }
+
+    public Cursor getBudget() {
+        Cursor mCursor = db.query(dbHelper.BUDGET_TABLE,
+                new String[] {
+                        dbHelper.ID_COL,
+                        dbHelper.FOOD_COL,
+                        dbHelper.TRAVEL_COL,
+                        dbHelper.ACCOMODATION_COL,
+                        dbHelper.PLAY_COL,
+                        dbHelper.SHOPPING_COL,
+                        dbHelper.BUDGET_COL
+                },
+                dbHelper.BUDGET_COL + "=" + 1,
                 null, null, null, null, null);
 
         if (mCursor != null) {

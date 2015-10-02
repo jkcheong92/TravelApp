@@ -35,6 +35,7 @@ public class Budget extends AppCompatActivity {
         myDb = new MyDB(this);
         sendBroadcastMessage();
         // getFormattedRecords();
+        getBudget();
     }
 
     @Override
@@ -90,6 +91,28 @@ public class Budget extends AppCompatActivity {
         budgetRecords.setText(output);
     }*/
 
+    public void getBudget() {
+        myDb.open();
+        String output = "";
+        Cursor c = myDb.getBudget();
+        if(c.moveToFirst()) {
+            do {
+                // TODO: Get from each column -> Update code when there is more columns in DB
+                output += c.getString(0) + " ";
+                output += c.getString(1) + " ";
+                output += c.getString(2) + " ";
+                output += c.getString(3) + " ";
+                output += c.getString(4) + " ";
+                output += c.getString(5) + " ";
+                output += c.getString(6) + " ";
+                output += "\n";
+            } while (c.moveToNext());
+        }
+        myDb.close();
+
+        Toast.makeText(Budget.this, output, Toast.LENGTH_LONG).show();
+    }
+
     // Add budget to database
     public void onClick_setBudget(View view) {
         myDb.open();
@@ -103,11 +126,11 @@ public class Budget extends AppCompatActivity {
         Double shopping = expenseFrag.getShoppingCost();
 
         // Store budget cost into DB
-        boolean isInserted = myDb.insertData(food, travel, accomodation, play, shopping);
+        boolean isInserted = myDb.insertData(food, travel, accomodation, play, shopping, 1);
         if (isInserted) {
             Toast.makeText(Budget.this, "Budget Set!", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(Budget.this, "Budget NOT Set!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Budget.this, "Please try again", Toast.LENGTH_LONG).show();
         }
 
         myDb.close();

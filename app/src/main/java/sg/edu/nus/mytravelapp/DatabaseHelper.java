@@ -17,6 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String ACCOMODATION_COL = "ACCOMODATION";
     public static final String PLAY_COL = "PLAY";
     public static final String SHOPPING_COL = "SHOPPING";
+    public static final String BUDGET_COL = "BUDGET";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -31,7 +32,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "TRAVEL DOUBLE NOT NULL, " +
                 "ACCOMODATION DOUBLE NOT NULL, " +
                 "PLAY DOUBLE NOT NULL, " +
-                "SHOPPING DOUBLE NOT NULL" +
+                "SHOPPING DOUBLE NOT NULL, " +
+                "BUDGET INTEGER NOT NULL" +
                 ") ");
     }
 
