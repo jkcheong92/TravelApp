@@ -35,8 +35,6 @@ public class Budget extends AppCompatActivity {
         fragmentTransaction.commit();
 
         myDb = new MyDB(this);
-        sendBroadcastMessage();
-        // getFormattedRecords();
         getBudget();
     }
 
@@ -81,7 +79,6 @@ public class Budget extends AppCompatActivity {
         String output = "";
         if(c.moveToFirst()) {
             do {
-                // TODO: Get from each column -> Update code when there is more columns in DB
                 output += c.getString(0) + " ";
                 output += c.getString(1) + " ";
                 output += "\n";
@@ -143,13 +140,5 @@ public class Budget extends AppCompatActivity {
         // Toast.makeText(Budget.this, "Row id: " + rowDeleted + " is deleted!", Toast.LENGTH_SHORT).show();
         Toast.makeText(Budget.this, "Resetted budget. Please set your new budget!", Toast.LENGTH_SHORT).show();
         myDb.close();
-    }
-
-    // TODO: Send Broadcast Message when expenses is close to budget
-    public void sendBroadcastMessage() {
-        Intent i = new Intent("Travellers_Broadcast");
-        i.putExtra("msg", "You are close to hitting your budget!");
-        sendBroadcast(i);
-        Toast.makeText(Budget.this, "Send broadcast", Toast.LENGTH_SHORT).show();
     }
 }
