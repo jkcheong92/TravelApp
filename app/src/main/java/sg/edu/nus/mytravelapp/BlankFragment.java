@@ -61,5 +61,11 @@ public class BlankFragment extends Fragment {
         return shoppingCost;
     }
 
-
+    public void setBudgetView(String foodBudget, String travelBudget, String accomodationBudget, String playBudget, String shoppingBudget) {
+        food.setText(foodBudget);
+        travel.setText(travelBudget);
+        accomodation.setText(accomodationBudget);
+        play.setText(playBudget);
+        shopping.setText(shoppingBudget);
+    }
 }

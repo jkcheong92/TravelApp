@@ -35,13 +35,22 @@ public class Budget extends AppCompatActivity {
         fragmentTransaction.commit();
 
         myDb = new MyDB(this);
-        getBudget();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_budget, menu);
+
+        ArrayList<String[]> allBudget = getBudget();
+
+        // Generate view of budget
+        if (!allBudget.isEmpty()) {
+            // Get most recent budget set
+            String[] mBudget = allBudget.get(allBudget.size()-1);
+            setTextView(mBudget);
+        }
+
         return true;
     }
 
@@ -90,24 +99,28 @@ public class Budget extends AppCompatActivity {
         budgetRecords.setText(output);
     }*/
 
-    public void getBudget() {
+    // Get budget from DB
+    public ArrayList<String[]> getBudget() {
         myDb.open();
-        String output = "";
-        // TODO: Get only 1 (last) record for budget
+
         Cursor c = myDb.getBudget();
-        if(c.moveToFirst()) {
+
+        ArrayList<String[]> records = new ArrayList<String[]>();
+
+        if (c.moveToFirst()) {
             do {
-                output += c.getString(0) + " ";
-                output += c.getString(1) + " ";
-                output += c.getString(2) + " ";
-                output += c.getString(3) + " ";
-                output += c.getString(4) + " ";
-                output += c.getString(5) + " ";
-                output += c.getString(6) + " ";
-                output += "\n";
+                String[] record = {c.getString(0), c.getString(1), c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6)};
+                records.add(record);
             } while (c.moveToNext());
         }
         myDb.close();
+        return records;
+    }
+
+    // Set budget on text view
+    public void setTextView(String[] mBudget) {
+        BlankFragment expenseFrag = (BlankFragment) getFragmentManager().findFragmentById(R.id.frameExpenses);
+        expenseFrag.setBudgetView(mBudget[1], mBudget[2], mBudget[3], mBudget[4], mBudget[5]);
     }
 
     // Add budget to database

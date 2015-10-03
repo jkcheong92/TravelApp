@@ -133,7 +133,7 @@ public class Expenses extends AppCompatActivity {
         pb.setProgress(totalPercentage.intValue());
         pb.setScaleY(10f);      // Fatten the progress bar
         TextView pbTxt = (TextView) findViewById(R.id.totalPercentage);
-        pbTxt.setText(String.format("%.2f", totalPercentage) + " % of total budget");
+        pbTxt.setText(String.format("%.2f", totalPercentage) + " % of total budget spent");
 
         // TODO: Send broadcast message when exceeded budget
         if (foodExpenses > foodBudget)

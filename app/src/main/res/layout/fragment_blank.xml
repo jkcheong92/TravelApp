@@ -8,50 +8,105 @@
     android:nestedScrollingEnabled="true">
 
     <!-- TODO: Update blank fragment layout -->
-    <EditText
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText_food"
-        android:hint="FOOD" />
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="FOOD"
+            android:id="@+id/textViewFood"
+            android:layout_gravity="bottom"
+            android:padding="10dp"/>
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editText_food" />
+    </TableRow>
 
-    <EditText
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText_travel"
-        android:hint="TRAVEL" />
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="TRAVEL"
+            android:id="@+id/textViewTravel"
+            android:layout_gravity="bottom"
+            android:padding="10dp"/>
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editText_travel" />
+    </TableRow>
 
-    <EditText
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText_accomodation"
-        android:hint="ACCOMODATION" />
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="STAY"
+            android:id="@+id/textViewAccomodation"
+            android:layout_gravity="bottom"
+            android:padding="10dp"/>
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editText_accomodation" />
+    </TableRow>
 
-    <EditText
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText_play"
-        android:hint="PLAY" />
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="PLAY"
+            android:id="@+id/textViewPlay"
+            android:layout_gravity="bottom"
+            android:padding="10dp"/>
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editText_play" />
+    </TableRow>
 
-    <EditText
+    <TableRow
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/editText_shopping"
-        android:hint="SHOPPING" />
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="SHOP"
+            android:id="@+id/textViewShopping"
+            android:layout_gravity="bottom"
+            android:padding="10dp"/>
+        <EditText
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/editText_shopping" />
+    </TableRow>
 
     <TextView
         android:layout_width="wrap_content"
