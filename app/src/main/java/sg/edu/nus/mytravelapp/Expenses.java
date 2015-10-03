@@ -147,6 +147,17 @@ public class Expenses extends AppCompatActivity {
         if (shoppingExpenses > shoppingBudget)
             Toast.makeText(Expenses.this, "You have exceeded your shopping budget!", Toast.LENGTH_LONG).show();
 
+        if (totalExpenses > totalBudget) {
+            sendBroadcastMessage();
+        }
+
+    }
+
+    // TODO: Send Broadcast Message when expenses is close to budget
+    public void sendBroadcastMessage() {
+        Intent i = new Intent("Travellers_Broadcast");
+        i.putExtra("msg", "You have exceeded your budget!");
+        sendBroadcast(i);
     }
 
     // Get budget from DB
