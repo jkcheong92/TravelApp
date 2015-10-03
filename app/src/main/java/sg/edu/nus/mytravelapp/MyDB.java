@@ -135,4 +135,8 @@ public class MyDB {
     public int deleteRecord(long id) {
         return  db.delete(dbHelper.BUDGET_TABLE, dbHelper.ID_COL + "=" + id, null);
     }
+
+    public int deleteBudget() {
+        return  db.delete(dbHelper.BUDGET_TABLE, dbHelper.BUDGET_COL + "=" + 1, null);
+    }
 }

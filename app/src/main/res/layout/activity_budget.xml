@@ -23,35 +23,23 @@
         android:layout_weight="4"
         android:id="@+id/frameExpenses" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Set Budget"
-        android:id="@+id/button2_save"
-        android:onClick="onClick_setBudget" />
-
-    <!--Database records
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0">
-
-        <TextView
-            android:layout_marginTop="30dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <Button
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Database Content"
-            android:id="@+id/textView_database_content"
-            android:layout_gravity="center_horizontal" />
-    </ScrollView>-->
-
-<!--    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Expenses"
-        android:id="@+id/button_expenses"
-        android:onClick="onClick_addExpenses" />-->
-
-
+            android:layout_height="wrap_content"
+            android:text="Set Budget"
+            android:id="@+id/button2_save"
+            android:onClick="onClick_setBudget" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reset Budget"
+            android:id="@+id/button_resetBudget"
+            android:onClick="onClick_resetBudget" />
+    </LinearLayout>
 
 </LinearLayout>
