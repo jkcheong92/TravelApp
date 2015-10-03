@@ -139,6 +139,8 @@ public class Budget extends AppCompatActivity {
         myDb.close();
     }
 
+    // TODO: Reset Budget
+
     // TODO: Send Broadcast Message when expenses is close to budget
     public void sendBroadcastMessage() {
         Intent i = new Intent("Travellers_Broadcast");
