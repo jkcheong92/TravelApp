@@ -4,6 +4,7 @@ import android.animation.PropertyValuesHolder;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,7 +33,14 @@ public class Expenses extends AppCompatActivity {
         fragmentTransaction.commit();
 
         myDb = new MyDB(this);
-        trackExpenses();
+
+        if (!getBudget().isEmpty()) {
+            trackExpenses();
+        } else {
+            Toast.makeText(Expenses.this, "You need to set your budget first!", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
     }
 
     @Override
