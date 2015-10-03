@@ -100,7 +100,6 @@ public class Budget extends AppCompatActivity {
         Cursor c = myDb.getBudget();
         if(c.moveToFirst()) {
             do {
-                // TODO: Get from each column -> Update code when there is more columns in DB
                 output += c.getString(0) + " ";
                 output += c.getString(1) + " ";
                 output += c.getString(2) + " ";
@@ -112,8 +111,6 @@ public class Budget extends AppCompatActivity {
             } while (c.moveToNext());
         }
         myDb.close();
-
-        Toast.makeText(Budget.this, output, Toast.LENGTH_LONG).show();
     }
 
     // Add budget to database
@@ -140,6 +137,13 @@ public class Budget extends AppCompatActivity {
     }
 
     // TODO: Reset Budget
+    public void onClick_resetBudget(View view) {
+        myDb.open();
+        int rowDeleted = myDb.deleteBudget();
+        // Toast.makeText(Budget.this, "Row id: " + rowDeleted + " is deleted!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(Budget.this, "Resetted budget. Please set your new budget!", Toast.LENGTH_SHORT).show();
+        myDb.close();
+    }
 
     // TODO: Send Broadcast Message when expenses is close to budget
     public void sendBroadcastMessage() {
