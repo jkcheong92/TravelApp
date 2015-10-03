@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="sg.edu.nus.mytravelapp.BlankFragment"
-    android:name="sg.edu.nus.mytravelapp.BlankFragment">
+    android:name="sg.edu.nus.mytravelapp.BlankFragment"
+    android:nestedScrollingEnabled="true">
 
     <!-- TODO: Update blank fragment layout -->
     <EditText

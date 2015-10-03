@@ -15,12 +15,58 @@
         android:paddingBottom="20dp"
         android:gravity="center_horizontal" />
 
-    <!--Daily expenses form-->
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:id="@+id/frameExpenses" />
+        android:orientation="horizontal" >
+
+        <!--Daily expenses form-->
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:id="@+id/frameExpenses" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:padding="15dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/foodPercentage" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/travelPercentage" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/accomodationPercentage" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/playPercentage" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/shoppingPercentage" />
+        </LinearLayout>
+    </LinearLayout>
 
     <Button
         android:layout_width= "match_parent"
@@ -29,5 +75,26 @@
         android:id="@+id/button"
         android:layout_gravity="center_horizontal|bottom"
         android:onClick="onClick_addExpenses"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progressBar"
+        android:max="100"
+        android:layout_centerInParent="true"   />
+    <TextView
+        android:id="@+id/totalPercentage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/progressBar"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:layout_centerInParent="true"  />
+    </RelativeLayout>
 
 </LinearLayout>
