@@ -4,8 +4,13 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Trip"
+        android:id="@+id/button_new"
+        android:layout_gravity="right|top"
+        android:onClick="onClick_resetDB"/>
 
     <Button
         android:layout_width="match_parent"
