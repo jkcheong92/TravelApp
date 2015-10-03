@@ -41,6 +41,14 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void onClick_resetDB(View view) {
+        MyDB myDb = new MyDB(this);
+        myDb.open();
+        myDb.deleteAllRecords();
+        myDb.close();
+        Toast.makeText(MainActivity.this, "Reset budget and expenses records", Toast.LENGTH_SHORT).show();
+    }
+
     public void onClick_convert(View view) {
         Intent i = new Intent(this, CurrencyConverter.class);
         startActivity(i);
