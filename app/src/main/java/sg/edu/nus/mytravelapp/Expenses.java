@@ -1,6 +1,5 @@
 package sg.edu.nus.mytravelapp;
 
-import android.animation.PropertyValuesHolder;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -8,7 +7,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,13 +17,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Expenses extends AppCompatActivity {
+public class Expenses extends DrawerActivity {
     MyDB myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
+        super.onCreateDrawer();
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction;
@@ -40,7 +39,7 @@ public class Expenses extends AppCompatActivity {
             trackExpenses();
         } else {
             Toast.makeText(Expenses.this, "You need to set your budget first!", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, Budget.class);
             startActivity(i);
         }
     }

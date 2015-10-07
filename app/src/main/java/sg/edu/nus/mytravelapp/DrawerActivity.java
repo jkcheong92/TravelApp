@@ -19,8 +19,9 @@ public class DrawerActivity extends ActionBarActivity {
 
     private Toolbar toolbar;
 
-    String TITLES[] = {"Home","Budget","Map","Contacts","About"};
-    int ICONS[] = {R.drawable.ic_home_black_24dp, R.drawable.ic_local_atm_black_24dp,R.drawable.ic_my_location_black_24dp,
+    String TITLES[] = {"Home","Money Converter","Budget","Expenses","Map","Contacts","About"};
+    int ICONS[] = {R.drawable.ic_home_black_24dp,R.drawable.ic_public_black_24dp, R.drawable.ic_local_atm_black_24dp, R.drawable.ic_local_grocery_store_black_24dp,
+            R.drawable.ic_my_location_black_24dp,
             R.drawable.ic_contact_phone_black_24dp,R.drawable.ic_more_black_24dp};
 
 
@@ -86,7 +87,17 @@ public class DrawerActivity extends ActionBarActivity {
                         startActivity(myIntent);
                     }
                     else if(position == 1) {
+                        Intent myIntent = new Intent(child.getContext(), CurrencyConverter.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(myIntent);
+                    }
+                    else if(position == 2) {
                         Intent myIntent = new Intent(child.getContext(), Budget.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(myIntent);
+                    }
+                    else if(position == 3) {
+                        Intent myIntent = new Intent(child.getContext(), Expenses.class);
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myIntent);
                     }
