@@ -26,8 +26,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView bgImg = (ImageView) findViewById(R.id.bgView);
-        bgImg.setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);
+        /*ImageView bgImg = (ImageView) findViewById(R.id.bgView);
+        bgImg.setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);*/
 
         final TextView subtitle = (TextView) findViewById(R.id.subtitle);
         final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
@@ -48,11 +48,6 @@ public class MainActivity extends Activity {
         TextView title = (TextView) findViewById(R.id.title);
         Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
         title.startAnimation(animationFadeIn);
-
-        /*WebView wv = (WebView)findViewById(R.id.webView1);
-        wv.getSettings().setJavaScriptEnabled(true);
-        wv.setWebChromeClient(new WebChromeClient());
-        wv.loadUrl("file:///android_asset/www/main.html");*/
     }
 
     @Override
