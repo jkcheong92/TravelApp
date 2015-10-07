@@ -47,26 +47,28 @@
         android:textSize="20sp"
         android:textStyle="bold|italic"
         android:onClick="onClick_newTrip"
-        android:layout_below="@+id/title"
-        android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
-        android:background="#00FF0000"
-        android:visibility="invisible"/>
+        android:background="#000000FF"
+        android:visibility="visible"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_alignParentTop="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I'm on a trip"
+        android:text="On a trip"
         android:id="@+id/currentTrip"
         android:typeface="sans"
         android:textSize="20sp"
         android:textStyle="bold|italic"
         android:onClick="onClick_currentTrip"
-        android:layout_below="@+id/newTrip"
-        android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
         android:background="#00FF0000"
-        android:visibility="invisible"/>
+        android:visibility="visible"
+        android:layout_alignTop="@+id/newTrip"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp" />
 
     <Button
         android:layout_width="wrap_content"
