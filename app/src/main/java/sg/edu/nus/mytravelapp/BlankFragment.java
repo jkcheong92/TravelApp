@@ -37,28 +37,48 @@ public class BlankFragment extends Fragment {
     }
 
     public double getFoodCost() {
-        Double foodCost = Double.parseDouble(food.getEditableText().toString());
-        return foodCost;
+        if (food.getEditableText().toString().matches("")) {
+            return 0;
+        } else {
+            Double foodCost = Double.parseDouble(food.getEditableText().toString());
+            return foodCost;
+        }
     }
 
     public double getTravelCost() {
-        Double travelCost = Double.parseDouble(travel.getEditableText().toString());
-        return travelCost;
+        if (travel.getEditableText().toString().matches("")) {
+            return 0;
+        } else {
+            Double travelCost = Double.parseDouble(travel.getEditableText().toString());
+            return travelCost;
+        }
     }
 
     public double getAccomodationCost() {
-        Double accomodationCost = Double.parseDouble(accomodation.getEditableText().toString());
-        return accomodationCost;
+        if (accomodation.getEditableText().toString().matches("")) {
+            return 0;
+        } else {
+            Double accomodationCost = Double.parseDouble(accomodation.getEditableText().toString());
+            return accomodationCost;
+        }
     }
 
     public double getPlayCost() {
-        Double playCost = Double.parseDouble(play.getEditableText().toString());
-        return playCost;
+        if (play.getEditableText().toString().matches("")) {
+            return 0;
+        } else {
+            Double playCost = Double.parseDouble(play.getEditableText().toString());
+            return playCost;
+        }
     }
 
     public double getShoppingCost() {
-        Double shoppingCost = Double.parseDouble(shopping.getEditableText().toString());
-        return shoppingCost;
+        if (shopping.getEditableText().toString().matches("")) {
+            return 0;
+        } else {
+            Double shoppingCost = Double.parseDouble(shopping.getEditableText().toString());
+            return shoppingCost;
+        }
     }
 
     public void setBudgetView(String foodBudget, String travelBudget, String accomodationBudget, String playBudget, String shoppingBudget) {
