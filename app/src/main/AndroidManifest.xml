@@ -8,7 +8,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -20,11 +21,13 @@
         </activity>
         <activity
             android:name=".CurrencyConverter"
-            android:label="@string/title_activity_currency_converter" >
+            android:label="@string/title_activity_currency_converter"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Budget"
-            android:label="@string/title_activity_budget" >
+            android:label="@string/title_activity_budget"
+            android:screenOrientation="portrait">
         </activity>
 
         <receiver android:name=".PersistentReceiver" >
@@ -35,8 +38,11 @@
 
         <activity
             android:name=".Expenses"
-            android:label="@string/title_activity_expenses" >
+            android:label="@string/title_activity_expenses"
+            android:screenOrientation="portrait">
         </activity>
+
+
     </application>
 
 </manifest>

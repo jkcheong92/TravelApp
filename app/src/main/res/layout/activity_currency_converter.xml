@@ -1,87 +1,120 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="sg.edu.nus.mytravelapp.CurrencyConverter"
-    android:padding="20dp">
+<android.support.v4.widget.DrawerLayout
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/currency_title"
-        android:id="@+id/textView_currency_title"
-        android:layout_marginBottom="20dp" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/DrawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="7dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/baseCurrency"
-        android:id="@+id/textView_baseCurrency" />
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar"></include>
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:id="@+id/editText_baseCurrency" />
+        <TextView
+            android:id="@+id/textView_currency_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/currency_title"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/convertCurrency"
-        android:id="@+id/textView_convertCurrency" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <EditText
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:id="@+id/editText_convertCurrency" />
+            <TextView
+                android:id="@+id/textView_baseCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/baseCurrency"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/editText_baseCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+            <TextView
+                android:id="@+id/textView_convertCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/convertCurrency"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/editText_convertCurrency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/editText_amountCurrency"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:ems="10"
+            android:hint="Amount to convert"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/button_convert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:onClick="onClick_convertAmount"
+            android:text="Convert" />
+
+        <TextView
+            android:id="@+id/textView_convertAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#10ADE0"
+            android:gravity="center"
+            android:padding="20px"
+            android:text="Converted amount"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <FrameLayout
+            android:id="@+id/listFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="50px" />
 
     </LinearLayout>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:hint="Amount to convert"
-        android:id="@+id/editText_amountCurrency"
-        android:layout_marginBottom="20dp"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Convert"
-        android:id="@+id/button_convert"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:onClick="onClick_convertAmount"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerView"
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Converted amount"
-        android:id="@+id/textView_convertAmount"
-        android:gravity="center"
-        android:background="#10ADE0"
-        android:padding="20px"/>
+        android:background="#ffffff"
+        android:scrollbars="vertical">
 
-        <FrameLayout
-            android:paddingTop="50px"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/listFragment"/>
+    </android.support.v7.widget.RecyclerView>
 
-</LinearLayout>
+
+</android.support.v4.widget.DrawerLayout>
+
+
+
+
+
+
+
