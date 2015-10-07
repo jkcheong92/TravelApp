@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,23 @@ public class MainActivity extends Activity {
 
         TextView title = (TextView) findViewById(R.id.title);
         Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        animationFadeIn.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                Button newTrip = (Button) findViewById(R.id.newTrip);
+                newTrip.setVisibility(View.VISIBLE);
+                Button currentTrip = (Button) findViewById(R.id.currentTrip);
+                currentTrip.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
         title.startAnimation(animationFadeIn);
     }
 
@@ -82,13 +100,36 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onClick_resetDB(View view) {
+    public void onClick_newTrip(View view) {
+        resetDB();
+        Button budget = (Button) findViewById(R.id.budget);
+        budget.setVisibility(View.VISIBLE);
+        Button currency = (Button) findViewById(R.id.currency);
+        currency.setVisibility(View.VISIBLE);
+        Button newTrip = (Button) findViewById(R.id.newTrip);
+        newTrip.setVisibility(View.GONE);
+        Button currentTrip = (Button) findViewById(R.id.currentTrip);
+        currentTrip.setVisibility(View.GONE);
+        //onClick_convert(view);
+    }
+
+    public void onClick_currentTrip(View view) {
+        Button expenses = (Button) findViewById(R.id.expenses);
+        expenses.setVisibility(View.VISIBLE);
+        Button map = (Button) findViewById(R.id.map);
+        map.setVisibility(View.VISIBLE);
+        Button newTrip = (Button) findViewById(R.id.newTrip);
+        newTrip.setVisibility(View.GONE);
+        Button currentTrip = (Button) findViewById(R.id.currentTrip);
+        currentTrip.setVisibility(View.GONE);
+        //onClick_addExpenses(view);
+    }
+
+    public void resetDB() {
         MyDB myDb = new MyDB(this);
         myDb.open();
         myDb.deleteAllRecords();
         myDb.close();
-        Intent i = new Intent(this, Budget.class);
-        startActivity(i);
     }
 
     public void onClick_convert(View view) {

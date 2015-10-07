@@ -41,15 +41,91 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Let&apos;s go!"
+        android:text="New trip"
         android:id="@+id/newTrip"
         android:typeface="sans"
         android:textSize="20sp"
         android:textStyle="bold|italic"
-        android:onClick="onClick_resetDB"
+        android:onClick="onClick_newTrip"
         android:layout_below="@+id/title"
         android:layout_centerHorizontal="true"
         android:textColor="#FFFFFF"
-        android:background="#00FF0000" />
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I'm on a trip"
+        android:id="@+id/currentTrip"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_currentTrip"
+        android:layout_below="@+id/newTrip"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Set budget"
+        android:id="@+id/budget"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_budget"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View conversion rate"
+        android:id="@+id/currency"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_convert"
+        android:layout_below="@+id/budget"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Track Expenses"
+        android:id="@+id/expenses"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_addExpenses"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View location"
+        android:id="@+id/map"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_map"
+        android:layout_below="@+id/expenses"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
 
 </RelativeLayout>
