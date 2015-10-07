@@ -1,10 +1,58 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/travel"
+        android:id="@+id/bgView" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Travelcents"
+        android:textSize="40sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plan your trip easily"
+        android:id="@+id/subtitle"
+        android:textSize="30sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
     <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Let&apos;s go!"
+        android:id="@+id/newTrip"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_resetDB"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000" />
+
+    <!--<Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Trip"
@@ -36,4 +84,9 @@
         android:layout_gravity="center_horizontal"
         android:onClick="onClick_addExpenses"/>
 
-</LinearLayout>
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webView1"/>-->
+
+</RelativeLayout>

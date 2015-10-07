@@ -82,7 +82,7 @@ public class DrawerActivity extends ActionBarActivity {
 
                     if(position==0)
                     {
-                        Intent myIntent = new Intent(child.getContext(), DrawerActivity.class);
+                        Intent myIntent = new Intent(child.getContext(), MainActivity.class);
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myIntent);
                     }

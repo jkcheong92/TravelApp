@@ -1,22 +1,58 @@
 package sg.edu.nus.mytravelapp;
 
+import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.BatteryManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        checkBattery();
+
+        ImageView bgImg = (ImageView) findViewById(R.id.bgView);
+        bgImg.setColorFilter(Color.rgb(123, 123, 123), android.graphics.PorterDuff.Mode.MULTIPLY);
+
+        final TextView subtitle = (TextView) findViewById(R.id.subtitle);
+        final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+        animationFadeOut.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                subtitle.setAlpha(0);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+        subtitle.startAnimation(animationFadeOut);
+
+        TextView title = (TextView) findViewById(R.id.title);
+        Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        title.startAnimation(animationFadeIn);
+
+        /*WebView wv = (WebView)findViewById(R.id.webView1);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.setWebChromeClient(new WebChromeClient());
+        wv.loadUrl("file:///android_asset/www/main.html");*/
     }
 
     @Override
@@ -24,6 +60,16 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        /* Hide status bar and action bar */
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
@@ -46,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
         myDb.open();
         myDb.deleteAllRecords();
         myDb.close();
-        Toast.makeText(MainActivity.this, "Reset budget and expenses records", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, Budget.class);
+        startActivity(i);
     }
 
     public void onClick_convert(View view) {
