@@ -52,41 +52,4 @@
         android:textColor="#FFFFFF"
         android:background="#00FF0000" />
 
-    <!--<Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Trip"
-        android:id="@+id/button_new"
-        android:layout_gravity="right|top"
-        android:onClick="onClick_resetDB"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Convert Money"
-        android:id="@+id/button_convert"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClick_convert"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Set Budget"
-        android:id="@+id/button_budget"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClick_budget"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Expenses"
-        android:id="@+id/button_expenses"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClick_addExpenses"/>
-
-    <WebView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/webView1"/>-->
-
 </RelativeLayout>
