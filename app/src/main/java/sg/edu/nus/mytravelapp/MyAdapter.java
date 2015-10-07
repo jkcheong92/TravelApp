@@ -23,7 +23,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
         TextView textView;
         ImageView imageView;
-        Context ctx;
 
 
 

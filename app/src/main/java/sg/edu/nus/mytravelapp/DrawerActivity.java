@@ -101,6 +101,11 @@ public class DrawerActivity extends ActionBarActivity {
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(myIntent);
                     }
+                    else if(position == 4) {
+                        Intent myIntent = new Intent(child.getContext(), Map.class);
+                        myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(myIntent);
+                    }
                     return true;
 
                 }

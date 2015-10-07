@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" tools:context="sg.edu.nus.mytravelapp.Map">
+    <item android:id="@+id/action_weather"
+        android:icon="@drawable/ic_cloud_queue_white_24dp"
+        android:title="@string/weather"
+        app:showAsAction="ifRoom" />
+    <item android:id="@+id/action_locate"
+        android:icon="@drawable/ic_location_on_white_24dp"
+        android:title="@string/location"
+        app:showAsAction="ifRoom"/>
+</menu>

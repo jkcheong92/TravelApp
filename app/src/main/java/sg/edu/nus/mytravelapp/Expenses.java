@@ -40,6 +40,7 @@ public class Expenses extends DrawerActivity {
         } else {
             Toast.makeText(Expenses.this, "You need to set your budget first!", Toast.LENGTH_LONG).show();
             Intent i = new Intent(this, Budget.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
     }

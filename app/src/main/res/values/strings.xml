@@ -16,4 +16,12 @@
     <string name="title_activity_expenses">Expenses</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="title_activity_map">Map</string>
+    <string name="weather">Weather</string>
+    <string name="location">Locate Me</string>
+    <string name="title_activity_weather_dialog">WeatherDialog</string>
+    <string name="tempLabel">Temperature</string>
+    <string name="tempMinLabel">Min. Temperature</string>
+    <string name="tempMaxLabel">Max. Temperature</string>
+    <string name="humidLabel">Humidity</string>
 </resources>
