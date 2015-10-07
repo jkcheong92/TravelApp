@@ -3,31 +3,27 @@
     package="sg.edu.nus.mytravelapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".CurrencyConverter"
             android:label="@string/title_activity_currency_converter"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Budget"
             android:label="@string/title_activity_budget"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
 
         <receiver android:name=".PersistentReceiver" >
@@ -39,10 +35,23 @@
         <activity
             android:name=".Expenses"
             android:label="@string/title_activity_expenses"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".Map"
+            android:label="@string/title_activity_map" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-
+        <activity
+            android:name=".WeatherDialog"
+            android:label="@string/title_activity_weather_dialog"
+            android:theme="@style/Theme.AppCompat.Dialog.Alert" >
+        </activity>
     </application>
 
 </manifest>
