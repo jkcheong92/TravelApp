@@ -101,27 +101,36 @@ public class MainActivity extends Activity {
     }
 
     public void onClick_newTrip(View view) {
-        resetDB();
+        Button expenses = (Button) findViewById(R.id.expenses);
+        expenses.setVisibility(View.GONE);
+        Button map = (Button) findViewById(R.id.map);
+        map.setVisibility(View.GONE);
+
         Button budget = (Button) findViewById(R.id.budget);
         budget.setVisibility(View.VISIBLE);
         Button currency = (Button) findViewById(R.id.currency);
         currency.setVisibility(View.VISIBLE);
-        Button newTrip = (Button) findViewById(R.id.newTrip);
+        /*Button newTrip = (Button) findViewById(R.id.newTrip);
         newTrip.setVisibility(View.GONE);
         Button currentTrip = (Button) findViewById(R.id.currentTrip);
-        currentTrip.setVisibility(View.GONE);
+        currentTrip.setVisibility(View.GONE);*/
         //onClick_convert(view);
     }
 
     public void onClick_currentTrip(View view) {
+        Button budget = (Button) findViewById(R.id.budget);
+        budget.setVisibility(View.GONE);
+        Button currency = (Button) findViewById(R.id.currency);
+        currency.setVisibility(View.GONE);
+
         Button expenses = (Button) findViewById(R.id.expenses);
         expenses.setVisibility(View.VISIBLE);
         Button map = (Button) findViewById(R.id.map);
         map.setVisibility(View.VISIBLE);
-        Button newTrip = (Button) findViewById(R.id.newTrip);
+        /*Button newTrip = (Button) findViewById(R.id.newTrip);
         newTrip.setVisibility(View.GONE);
         Button currentTrip = (Button) findViewById(R.id.currentTrip);
-        currentTrip.setVisibility(View.GONE);
+        currentTrip.setVisibility(View.GONE);*/
         //onClick_addExpenses(view);
     }
 
@@ -138,6 +147,7 @@ public class MainActivity extends Activity {
     }
 
     public void onClick_budget(View view) {
+        resetDB();
         Intent i = new Intent(this, Budget.class);
         startActivity(i);
     }
