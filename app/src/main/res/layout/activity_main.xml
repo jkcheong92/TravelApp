@@ -1,39 +1,133 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:adjustViewBounds="true"
+        android:src="@drawable/travel"
+        android:id="@+id/bgView" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Travelcents"
+        android:textSize="40sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Plan your trip easily"
+        android:id="@+id/subtitle"
+        android:textSize="30sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:typeface="serif"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Trip"
-        android:id="@+id/button_new"
-        android:layout_gravity="right|top"
-        android:onClick="onClick_resetDB"/>
+        android:text="New trip"
+        android:id="@+id/newTrip"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_newTrip"
+        android:textColor="#FFFFFF"
+        android:background="#000000FF"
+        android:visibility="visible"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_alignParentTop="true" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Convert Money"
-        android:id="@+id/button_convert"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClick_convert"/>
+        android:text="On a trip"
+        android:id="@+id/currentTrip"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_currentTrip"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="visible"
+        android:layout_alignTop="@+id/newTrip"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="60dp" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Set Budget"
-        android:id="@+id/button_budget"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClick_budget"/>
+        android:text="Set budget"
+        android:id="@+id/budget"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_budget"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Expenses"
-        android:id="@+id/button_expenses"
-        android:layout_gravity="center_horizontal"
-        android:onClick="onClick_addExpenses"/>
+        android:text="View conversion rate"
+        android:id="@+id/currency"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_convert"
+        android:layout_below="@+id/budget"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
 
-</LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Track Expenses"
+        android:id="@+id/expenses"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_addExpenses"
+        android:layout_below="@+id/title"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View location"
+        android:id="@+id/map"
+        android:typeface="sans"
+        android:textSize="20sp"
+        android:textStyle="bold|italic"
+        android:onClick="onClick_map"
+        android:layout_below="@+id/expenses"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:background="#00FF0000"
+        android:visibility="invisible"/>
+
+</RelativeLayout>
