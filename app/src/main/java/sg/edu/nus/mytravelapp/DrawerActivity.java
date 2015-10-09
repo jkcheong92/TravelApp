@@ -1,7 +1,11 @@
 package sg.edu.nus.mytravelapp;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.BatteryManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class DrawerActivity extends ActionBarActivity {
 
@@ -102,9 +107,32 @@ public class DrawerActivity extends ActionBarActivity {
                         startActivity(myIntent);
                     }
                     else if(position == 4) {
-                        Intent myIntent = new Intent(child.getContext(), Map.class);
+                        float batteryPercent = checkBattery();
+
+                        final Intent myIntent = new Intent(child.getContext(), Map.class);
                         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(myIntent);
+
+                        // Warn user of Map Battery usage
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(DrawerActivity.this);
+                        builder1.setMessage("Map drains your phone battery quickly. Your device battery level is now: "  + batteryPercent + "%. Are you sure you want to continue?");
+                        builder1.setCancelable(true);
+                        builder1.setPositiveButton("Yes",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                        startActivity(myIntent);
+                                    }
+                                });
+                        builder1.setNegativeButton("No",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        dialog.cancel();
+                                        finish();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
                     }
                     return true;
 
@@ -169,6 +197,33 @@ public class DrawerActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    // TODO: Put this in Map Activity
+    public float checkBattery() {
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+
+        Intent batteryStatus = this.registerReceiver(null, intentFilter);
+
+        // Is battery charging or full?
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+
+        // How are we charging the battery?
+        int chargePlug = batteryStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+        boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;
+
+        // Check battery level
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float batteryPercent = level/(float)scale * 100;
+
+        // Toast message if battery level is low and user is not charging phone
+        if (batteryPercent < 50 && isCharging == false)
+            Toast.makeText(DrawerActivity.this, "Your device battery level is low now: " + batteryPercent, Toast.LENGTH_SHORT).show();
+
+        return batteryPercent;
     }
 
 }

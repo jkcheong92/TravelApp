@@ -2,6 +2,8 @@ package sg.edu.nus.mytravelapp;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -158,8 +160,62 @@ public class MainActivity extends Activity {
     }
 
     public void onClick_map(View view) {
-        Intent i = new Intent(this, Map.class);
-        startActivity(i);
+        float batteryPercent = checkBattery();
+
+        final Intent mapIntent = new Intent(this, Map.class);
+
+        // Warn user of Map Battery usage
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+        builder1.setMessage("Map drains your phone battery quickly. Your device battery level is now: " + batteryPercent + "%. Are you sure you want to continue?");
+        builder1.setCancelable(true);
+        builder1 = builder1.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        startActivity(mapIntent);
+                    }
+                });
+        builder1.setNegativeButton("No",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+    }
+
+    // TODO: Put this in Map Activity
+    public float checkBattery() {
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+
+        Intent batteryStatus = this.registerReceiver(null, intentFilter);
+
+        // Is battery charging or full?
+        int status = batteryStatus.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+
+        /*// How are we charging the battery?
+        int chargePlug = batteryStatus.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1);
+        boolean usbCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_USB;
+        boolean acCharge = chargePlug == BatteryManager.BATTERY_PLUGGED_AC;*/
+
+        // Check battery level
+        int level = batteryStatus.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+        int scale = batteryStatus.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+        float batteryPercent = level/(float)scale * 100;
+
+        // Toast message if battery level is low and user is not charging phone
+        if (batteryPercent < 50 && isCharging == false)
+            Toast.makeText(MainActivity.this, "Your device battery level is low now: " + batteryPercent, Toast.LENGTH_SHORT).show();
+
+        /*if (usbCharge)
+        Toast.makeText(MainActivity.this, "Charging phone by usb", Toast.LENGTH_SHORT).show();
+        if (acCharge)
+            Toast.makeText(MainActivity.this, "Charging phone by acCharge", Toast.LENGTH_SHORT).show();*/
+
+        return batteryPercent;
     }
 
 }
