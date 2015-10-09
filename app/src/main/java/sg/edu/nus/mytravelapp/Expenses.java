@@ -1,12 +1,12 @@
 package sg.edu.nus.mytravelapp;
 
-import android.animation.PropertyValuesHolder;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
-import android.support.v7.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,13 +17,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Expenses extends AppCompatActivity {
+public class Expenses extends DrawerActivity {
     MyDB myDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expenses);
+        super.onCreateDrawer();
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction;
@@ -38,7 +39,8 @@ public class Expenses extends AppCompatActivity {
             trackExpenses();
         } else {
             Toast.makeText(Expenses.this, "You need to set your budget first!", Toast.LENGTH_LONG).show();
-            Intent i = new Intent(this, MainActivity.class);
+            Intent i = new Intent(this, Budget.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
     }
@@ -114,18 +116,33 @@ public class Expenses extends AppCompatActivity {
         // TODO: Show progress bar beside field
         TextView foodTxt = (TextView) findViewById(R.id.foodPercentage);
         Double foodPercentage = foodExpenses / foodBudget * 100;
+        if (foodPercentage > 100) {
+            foodTxt.setTextColor(Color.RED);
+        }
         foodTxt.setText(String.format("%.2f", foodPercentage) + " %");
         TextView travelTxt = (TextView) findViewById(R.id.travelPercentage);
         Double travelPercentage = travelExpenses / travelBudget * 100;
+        if (travelPercentage > 100) {
+            travelTxt.setTextColor(Color.RED);
+        }
         travelTxt.setText(String.format("%.2f", travelPercentage) + " %");
         TextView accomodationTxt = (TextView) findViewById(R.id.accomodationPercentage);
         Double accomodationPercentage = accomodationExpenses / accomodationBudget * 100;
+        if (accomodationPercentage > 100) {
+            accomodationTxt.setTextColor(Color.RED);
+        }
         accomodationTxt.setText(String.format("%.2f", accomodationPercentage) + " %");
         TextView playTxt = (TextView) findViewById(R.id.playPercentage);
         Double playPercentage = playExpenses / playBudget * 100;
+        if (playPercentage > 100) {
+            playTxt.setTextColor(Color.RED);
+        }
         playTxt.setText(String.format("%.2f", playPercentage) + " %");
         TextView shoppingTxt = (TextView) findViewById(R.id.shoppingPercentage);
         Double shoppingPercentage = shoppingExpenses / shoppingBudget * 100;
+        if (shoppingPercentage > 100) {
+            shoppingTxt.setTextColor(Color.RED);
+        }
         shoppingTxt.setText(String.format("%.2f", shoppingPercentage) + " %");
 
         Double totalPercentage = totalExpenses / totalBudget * 100;
@@ -134,6 +151,9 @@ public class Expenses extends AppCompatActivity {
         pb.setScaleY(10f);      // Fatten the progress bar
         TextView pbTxt = (TextView) findViewById(R.id.totalPercentage);
         pbTxt.setText(String.format("%.2f", totalPercentage) + " % of total budget spent");
+        if (totalPercentage > 100) {
+            pb.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
+        }
 
         // TODO: Send broadcast message when exceeded budget
         if (foodExpenses > foodBudget)
