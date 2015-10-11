@@ -103,7 +103,7 @@ function getWeather() {
             }
         };
 
-        var getString = theUrl + "?" + paramString + "&APPKEY="+APIKey;
+        var getString = theUrl + "?" + paramString + "&APPID="+APIKey;
 
         xmlHttp.open("GET", getString, true);   // true means asynchronous
 
