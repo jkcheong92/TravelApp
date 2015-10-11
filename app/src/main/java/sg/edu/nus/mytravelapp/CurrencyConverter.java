@@ -1,14 +1,23 @@
 package sg.edu.nus.mytravelapp;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,18 +29,21 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class CurrencyConverter extends DrawerActivity implements ItemFragment.OnFragmentInteractionListener{
+
+    private FragmentManager fragmentManager = getFragmentManager();
+    private FragmentTransaction fragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_currency_converter);
         super.onCreateDrawer();
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         // Dynamically attach ItemFragment
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction;
         fragmentTransaction = fragmentManager.beginTransaction();
         Fragment popularCurr = new ItemFragment();
         fragmentTransaction.add(R.id.listFragment, popularCurr);
@@ -58,6 +70,48 @@ public class CurrencyConverter extends DrawerActivity implements ItemFragment.On
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick_addDestination(View view) {
+        final ItemFragment fragmentList = (ItemFragment) fragmentManager.findFragmentById(R.id.listFragment);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Add Favorites");
+
+        // Convert scale first to set padding
+        int paddingPixel = 20;
+        float density = this.getResources().getDisplayMetrics().density;
+        int paddingDp = (int)(paddingPixel * density);
+
+        // Adding layout of dialogue box programatically
+        final EditText edittext_country = new EditText(this);
+        edittext_country.setHint("Country");
+        edittext_country.setPadding(paddingDp, paddingDp, 0, paddingDp);
+        final EditText editText_currency = new EditText(this);
+        editText_currency.setHint("Currency");
+        editText_currency.setPadding(paddingDp, paddingDp, 0, paddingDp);
+
+        LinearLayout layout = new LinearLayout(getApplicationContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+        layout.addView(edittext_country);
+        layout.addView(editText_currency);
+        alert.setView(layout);
+
+        alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String country = edittext_country.getText().toString().toUpperCase();
+                String currency = editText_currency.getText().toString().toUpperCase();
+                fragmentList.addItem(currency, country);
+            }
+        });
+
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // what ever you want to do with No option.
+            }
+        });
+
+        alert.show();
     }
 
     @Override
