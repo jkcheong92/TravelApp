@@ -3,6 +3,7 @@ package sg.edu.nus.mytravelapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -14,6 +15,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.parse.Parse;
+import com.parse.ParseACL;
+import com.parse.ParseInstallation;
+import com.parse.ParsePush;
+import com.parse.PushService;
 
 import java.util.ArrayList;
 
@@ -88,6 +95,7 @@ public class Expenses extends DrawerActivity {
         }
 
         trackExpenses();
+        toastWarnings();
         myDb.close();
     }
 
@@ -154,6 +162,29 @@ public class Expenses extends DrawerActivity {
         if (totalPercentage > 100) {
             pb.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
         }
+    }
+
+    public void toastWarnings() {
+        String[] lastBudget = getBudget().get(getBudget().size() - 1);
+        Double foodBudget = Double.parseDouble(lastBudget[1]);
+        Double travelBudget = Double.parseDouble(lastBudget[2]);
+        Double accomodationBudget = Double.parseDouble(lastBudget[3]);
+        Double playBudget = Double.parseDouble(lastBudget[4]);
+        Double shoppingBudget = Double.parseDouble(lastBudget[5]);
+        Double totalBudget = foodBudget + travelBudget + accomodationBudget + playBudget + shoppingBudget;
+
+        ArrayList<String[]> allExpenses = getExpenses();
+        Double foodExpenses, travelExpenses, accomodationExpenses, playExpenses, shoppingExpenses;
+        foodExpenses = travelExpenses = accomodationExpenses = playExpenses = shoppingExpenses = 0.0;
+        for (int i = 0; i < allExpenses.size(); i++) {
+            String[] totalExpenses = allExpenses.get(i);
+            foodExpenses += Double.parseDouble(totalExpenses[1]);
+            travelExpenses += Double.parseDouble(totalExpenses[2]);
+            accomodationExpenses += Double.parseDouble(totalExpenses[3]);
+            playExpenses += Double.parseDouble(totalExpenses[4]);
+            shoppingExpenses += Double.parseDouble(totalExpenses[5]);
+        }
+        Double totalExpenses = foodExpenses + travelExpenses + accomodationExpenses + playExpenses + shoppingExpenses;
 
         // TODO: Send broadcast message when exceeded budget
         if (foodExpenses > foodBudget)
@@ -169,8 +200,8 @@ public class Expenses extends DrawerActivity {
 
         if (totalExpenses > totalBudget) {
             sendBroadcastMessage();
+            sendPushNotification();
         }
-
     }
 
     // TODO: Send Broadcast Message when expenses is close to budget
@@ -178,6 +209,13 @@ public class Expenses extends DrawerActivity {
         Intent i = new Intent("Travellers_Broadcast");
         i.putExtra("msg", "You have exceeded your budget!");
         sendBroadcast(i);
+    }
+
+    public void sendPushNotification() {
+        ParsePush push = new ParsePush();
+        String message = "You have exceeded your total budget!";
+        push.setMessage(message);
+        push.sendInBackground();
     }
 
     // Get budget from DB
