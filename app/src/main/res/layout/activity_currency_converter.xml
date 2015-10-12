@@ -50,12 +50,11 @@
                         android:text="@string/baseCurrency"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                    <EditText
-                        android:id="@+id/editText_baseCurrency"
+                    <AutoCompleteTextView
+                        android:id="@+id/actv_baseCurrency"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="text" />
+                        android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/textView_convertCurrency"
@@ -66,12 +65,11 @@
                         android:text="@string/convertCurrency"
                         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-                    <EditText
-                        android:id="@+id/editText_convertCurrency"
+                    <AutoCompleteTextView
+                        android:id="@+id/actv_convertCurrency"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:inputType="text" />
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
