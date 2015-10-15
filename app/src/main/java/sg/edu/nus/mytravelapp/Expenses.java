@@ -1,30 +1,39 @@
 package sg.edu.nus.mytravelapp;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.Parse;
-import com.parse.ParseACL;
+import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
-import com.parse.PushService;
+import com.parse.SaveCallback;
+
+import android.provider.Settings.Secure;
 
 import java.util.ArrayList;
 
 public class Expenses extends DrawerActivity {
+    private static final String TAG = null;
+    private static String PARSE_CHANNEL = null;
     MyDB myDb;
 
     @Override
@@ -65,10 +74,60 @@ public class Expenses extends DrawerActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        String android_id = Secure.getString(getApplicationContext().getContentResolver(), Secure.ANDROID_ID);
+        PARSE_CHANNEL = "P" + android_id; //channel name must start with a letter
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_pairing) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setTitle("Share expenses tracking");
+            builder1.setMessage("Use this key to link device: " + PARSE_CHANNEL);
+            builder1.setPositiveButton("Ok",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+
+        if (id == R.id.action_supervise) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setTitle("Subscribe to expenses tracking");
+            builder1.setMessage("Enter key to link device");
+            final EditText keyTxt = new EditText(this);
+            keyTxt.setHint("Enter key");
+            builder1.setView(keyTxt);
+
+            builder1.setPositiveButton("Pair",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            String key = keyTxt.getEditableText().toString();
+                            Log.e(TAG, "String key: " + key);
+                            ParsePush.subscribeInBackground(key, new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e == null) {
+                                        Log.e(TAG, "Expenses supervisor: Subscribing to channel " + PARSE_CHANNEL);
+                                    } else {
+                                        Log.e("com.parse.push", "failed to subscribe for push", e);
+                                    }
+                                }
+                            });
+                            dialog.cancel();
+                        }
+                    });
+            builder1.setNegativeButton("Cancel",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+
         }
 
         return super.onOptionsItemSelected(item);
@@ -215,7 +274,9 @@ public class Expenses extends DrawerActivity {
         ParsePush push = new ParsePush();
         String message = "You have exceeded your total budget!";
         push.setMessage(message);
+        push.setChannel(PARSE_CHANNEL);
         push.sendInBackground();
+        Log.e(TAG, "Expenses sendPushNotification(): Parse channel " + PARSE_CHANNEL);
     }
 
     // Get budget from DB
