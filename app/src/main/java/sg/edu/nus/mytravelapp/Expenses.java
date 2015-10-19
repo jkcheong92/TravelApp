@@ -95,9 +95,15 @@ public class Expenses extends DrawerActivity {
         if (id == R.id.action_supervise) {
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setTitle("Subscribe to expenses tracking");
-            builder1.setMessage("Enter key to link device");
             final EditText keyTxt = new EditText(this);
-            keyTxt.setHint("Enter key");
+            keyTxt.setHint("Enter key to link device");
+
+            // Convert scale first to set padding
+            int paddingPixel = 20;
+            float density = this.getResources().getDisplayMetrics().density;
+            int paddingDp = (int)(paddingPixel * density);
+            keyTxt.setPadding(paddingDp, paddingDp, 0, paddingDp);
+
             builder1.setView(keyTxt);
 
             builder1.setPositiveButton("Pair",
