@@ -27,4 +27,7 @@ dependencies {
     compile 'com.android.support:design:23.0.1'
     // Push Notification
     compile 'com.parse:parse-android:1.10.3'
+
+    //apache commons
+    compile 'org.apache.commons:commons-lang3:3.4'
 }
