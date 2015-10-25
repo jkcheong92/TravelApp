@@ -24,4 +24,14 @@
     <string name="tempMinLabel">Min. Temperature</string>
     <string name="tempMaxLabel">Max. Temperature</string>
     <string name="humidLabel">Humidity</string>
+    <string name="accom">Accomomdation</string>
+    <string name="advice_label">Input:</string>
+    <string name="advice_butt">Search</string>
+    <string name="location_error">Sorry but our database does not contain information about this location!</string>
+
+
+    <string-array name="adviceArray">
+        <item>Country</item>
+        <item>Location</item>
+    </string-array>
 </resources>

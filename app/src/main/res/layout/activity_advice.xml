@@ -1,0 +1,202 @@
+<android.support.v4.widget.DrawerLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/DrawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="7dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar">
+
+        </include>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/advice_label"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
+
+            <EditText
+                android:id="@+id/adviceInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:inputType="text"
+                android:textSize="20sp" />
+
+            <!--<Spinner-->
+                <!--android:id="@+id/optionSpinner"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="2">-->
+
+            <!--</Spinner>-->
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/adviceButt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="performSearch"
+            android:text="@string/advice_butt" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/infoBar"
+            android:padding="5dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Food"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/advice_food"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        
+                        />
+                </TableRow>
+                <TableRow
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Travel"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/advice_travel"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Stay"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/advice_stay"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Play"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/advice_play"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        />
+
+                </TableRow>
+                <TableRow
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Shop"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/advice_shop"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        />
+
+                </TableRow>
+
+                <TableRow
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Average Cost"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/advice_avg"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        />
+
+                </TableRow>
+            </TableLayout>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/RecyclerView"
+        android:layout_width="320dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+
+        android:background="#ffffff"
+        android:scrollbars="vertical">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</android.support.v4.widget.DrawerLayout>

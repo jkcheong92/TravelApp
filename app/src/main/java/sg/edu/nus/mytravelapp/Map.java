@@ -1,11 +1,7 @@
 package sg.edu.nus.mytravelapp;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.BatteryManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +9,6 @@ import android.webkit.GeolocationPermissions;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 public class Map extends DrawerActivity {
 
@@ -31,7 +26,8 @@ public class Map extends DrawerActivity {
         map.getSettings().setGeolocationEnabled(true);
 
         map.setWebChromeClient(new GeoWebChromeClient());
-        map.addJavascriptInterface(new WeatherInterface(this),"AndroidWeather");
+        map.addJavascriptInterface(new WeatherInterface(this), "AndroidWeather");
+        //map.addJavascriptInterface(new AdviceInterface(this),"AndroidAdvice");
 
         map.loadUrl("file:///android_asset/map.html");
     }
@@ -58,6 +54,9 @@ public class Map extends DrawerActivity {
         else if(id == R.id.action_locate){
             map.loadUrl("javascript:locateMe()");
 
+        }
+        else if (id == R.id.action_accom){
+            map.loadUrl("javascript:getAccommodation()");
         }
 
         return super.onOptionsItemSelected(item);
@@ -93,9 +92,21 @@ public class Map extends DrawerActivity {
         public void showWeather(String result) {
             Intent myIntent = new Intent(mContext, WeatherDialog.class);
             myIntent.putExtra("result",result);
-//            Bundle bundle = new Bundle();
-//            bundle.putString("result",result);
             startActivity(myIntent);
         }
     }
+
+//    public class AdviceInterface{
+//        Context mContext;
+//
+//        AdviceInterface(Context c)
+//        {
+//            mContext=c;
+//        }
+//
+//        @JavascriptInterface
+//        public void showAccomd(String result){
+//            Intent myIntent = new Intent
+//        }
+//    }
 }

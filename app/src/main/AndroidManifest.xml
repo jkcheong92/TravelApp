@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!--Parse Permissions-->
+    <!-- Parse Permissions -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -16,22 +16,24 @@
       IMPORTANT: Change "com.parse.starter.permission.C2D_MESSAGE" in the lines below
       to match your app's package name + ".permission.C2D_MESSAGE".
     -->
-    <permission android:protectionLevel="signature"
-        android:name="sg.edu.nus.mytravelapp.permission.C2D_MESSAGE" />
+    <permission
+        android:name="sg.edu.nus.mytravelapp.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
     <uses-permission android:name="sg.edu.nus.mytravelapp.permission.C2D_MESSAGE" />
 
     <application
+        android:name=".PushNotification"
         android:allowBackup="true"
         android:icon="@drawable/travel_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="sg.edu.nus.mytravelapp.PushNotification">
-
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -62,35 +64,43 @@
             android:label="@string/title_activity_map"
             android:screenOrientation="portrait" >
         </activity>
-
         <activity
             android:name=".WeatherDialog"
             android:label="@string/title_activity_weather_dialog"
             android:theme="@style/Theme.AppCompat.Dialog.Alert" >
         </activity>
 
-        <!--Parse Intent-->
+        <!-- Parse Intent -->
         <service android:name="com.parse.PushService" />
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
-            android:exported="false">
+
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.DELETE" />
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
+        <receiver
+            android:name="com.parse.GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <!--
-                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
-                -->
+                <!-- IMPORTANT: Change "com.parse.starter" to match your app's package name. -->
                 <category android:name="sg.edu.nus.mytravelapp" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".Advice"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
+        <activity android:name=".Highlight"
+            android:windowSoftInputMode="stateHidden|adjustResize" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,7 +1,7 @@
 // Try HTML5 geolocation.
 
 var image = 'images/house170.png';
-var markers2 =[];
+var markers2 = [];
 
 
 if (navigator.geolocation) {
@@ -22,7 +22,7 @@ if (navigator.geolocation) {
             map: map,
             position: pos,
             animation: google.maps.Animation.DROP,
-            icon:image
+            icon: image
         });
 
 
@@ -46,7 +46,6 @@ function deleteMarkers() {
 }
 
 
-
 function locateMe() {
 
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -60,7 +59,7 @@ function locateMe() {
             map: map,
             position: pos,
             animation: google.maps.Animation.DROP,
-            icon:image
+            icon: image
         });
 
 
@@ -82,7 +81,7 @@ function getWeather() {
 
         var theUrl = 'http://api.openweathermap.org/data/2.5/weather';
 
-        var paramString = "lat="+pos.lat+"&"+"lon="+pos.lng+"&units=metric";
+        var paramString = "lat=" + pos.lat + "&" + "lon=" + pos.lng + "&units=metric";
 
         var APIKey = "8ed89d12856dd0e8636a7fe9f351a090";
 
@@ -103,7 +102,7 @@ function getWeather() {
             }
         };
 
-        var getString = theUrl + "?" + paramString + "&APPID="+APIKey;
+        var getString = theUrl + "?" + paramString + "&APPID=" + APIKey;
 
         xmlHttp.open("GET", getString, true);   // true means asynchronous
 
@@ -113,7 +112,45 @@ function getWeather() {
     })
 }
 
-setupSearch = function() {
+function getAccommodation() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+
+        var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+
+        var theUrl = 'http://www.budgetyourtrip.com/api/v3/categories/accommodation/geosearch/' + pos.lat + '/' + pos.lng;
+
+
+        var APIKey = "syz1992@gmail.com";
+
+        var xmlHttp = null;
+        xmlHttp = new XMLHttpRequest();
+
+        xmlHttp.onreadystatechange = function () {//Call a function when the state changes.
+            // note: if async == false, do not write this function
+            if (xmlHttp.readyState == 4) {
+                //if (xmlHttp.status == 200 || xmlHttp.status == 0) {
+                if (xmlHttp.status == 200) {
+                    //var JSONDataPost2 = JSON.parse(xmlHttp.responseText);
+                    //AndroidWeather.showWeather(xmlHttp.responseText);
+                    console.log("hi");
+
+
+                }
+            }
+        };
+
+        xmlHttp.open("GET", theUrl, true);   // true means asynchronous
+        xmlHttp.setRequestHeader('X-API-KEY',APIKey);
+        xmlHttp.send();
+
+
+    })
+}
+
+setupSearch = function () {
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
     var infowindow = new google.maps.InfoWindow();
@@ -159,8 +196,8 @@ setupSearch = function() {
             });
 
 
-            google.maps.event.addListener(marker, 'click', function() {
-                var content = place.name+"<br>"+place.formatted_address+"<br>";
+            google.maps.event.addListener(marker, 'click', function () {
+                var content = place.name + "<br>" + place.formatted_address + "<br>";
                 infowindow.setContent(content);
                 infowindow.addC
                 infowindow.open(map, this);
