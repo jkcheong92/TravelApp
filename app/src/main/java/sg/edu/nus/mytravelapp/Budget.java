@@ -3,6 +3,7 @@ package sg.edu.nus.mytravelapp;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -66,8 +67,9 @@ public class Budget extends DrawerActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.budget_advice) {
+            Intent i = new Intent(this, Advice.class);
+            startActivity(i);
         }
 
         return super.onOptionsItemSelected(item);
