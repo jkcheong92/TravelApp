@@ -6,16 +6,23 @@
     android:layout_height="match_parent"
     android:elevation="7dp"
     >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include
+            android:id="@+id/tool_bar"
+            layout="@layout/tool_bar">
+        </include>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <include
-                android:id="@+id/tool_bar"
-                layout="@layout/tool_bar">
-            </include>
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            android:orientation="vertical"
+            android:padding="20dp" >
 
             <TextView
                 android:text="Set Budget"
@@ -31,27 +38,28 @@
                 android:layout_height="0dp"
                 android:layout_weight="4"
                 android:id="@+id/frameExpenses" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
-                android:orientation="vertical">
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Set Budget"
-                    android:id="@+id/button2_save"
-                    android:onClick="onClick_setBudget" />
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Reset Budget"
-                    android:id="@+id/button_resetBudget"
-                    android:onClick="onClick_resetBudget" />
-            </LinearLayout>
-
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Set Budget"
+                android:id="@+id/button2_save"
+                android:onClick="onClick_setBudget" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reset Budget"
+                android:id="@+id/button_resetBudget"
+                android:onClick="onClick_resetBudget" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 

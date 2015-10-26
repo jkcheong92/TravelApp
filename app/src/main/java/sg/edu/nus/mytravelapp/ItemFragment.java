@@ -10,6 +10,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import sg.edu.nus.mytravelapp.dummy.DummyContent;
@@ -68,6 +69,18 @@ public class ItemFragment extends Fragment implements AbsListView.OnItemClickLis
         mListView.setOnItemClickListener(this);
 
         return view;
+    }
+
+    public void addItem(String code, String country) {
+        DummyContent.DummyItem newItem = new DummyContent.DummyItem(code, country);
+        DummyContent.ITEM_MAP.put(code, newItem);
+        DummyContent.ITEMS.add(newItem);
+
+        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+
+        // Set the adapter
+        ((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
     }
 
     @Override
