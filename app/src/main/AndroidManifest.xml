@@ -96,9 +96,12 @@
 
         <activity
             android:name=".Advice"
+            android:label="Budget Advice"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
-        <activity android:name=".Highlight"
+        <activity
+            android:name=".Highlight"
+            android:label="Highlights"
             android:windowSoftInputMode="stateHidden|adjustResize" >
         </activity>
     </application>
