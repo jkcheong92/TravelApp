@@ -38,7 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:inputType="text"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:hint="@string/adviceHint"/>
 
             <!--<Spinner-->
                 <!--android:id="@+id/optionSpinner"-->

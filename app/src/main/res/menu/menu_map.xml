@@ -5,10 +5,6 @@
         android:icon="@drawable/ic_cloud_queue_white_24dp"
         android:title="@string/weather"
         app:showAsAction="ifRoom" />
-    <item android:id="@+id/action_accom"
-        android:icon="@drawable/ic_hotel_white_24dp"
-        android:title="@string/accom"
-        app:showAsAction="ifRoom"/>
     <item android:id="@+id/action_locate"
         android:icon="@drawable/ic_location_on_white_24dp"
         android:title="@string/location"

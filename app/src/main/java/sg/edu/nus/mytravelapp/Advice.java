@@ -283,5 +283,79 @@ public class Advice extends DrawerActivity {
         }
     }
 
+    public class CountryAsync extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+                JSONObject jsonResult = new JSONObject(getJSON(params[0]));
+                JSONArray data = jsonResult.getJSONArray("data");
+                JSONObject country = data.getJSONObject(0);
+                String returning="";
+                returning+=country.getString("country_code");
+                returning+=";";
+                returning+=country.getString("currency_code");
+                return returning;
+
+
+            } catch (JSONException e) {
+
+                e.printStackTrace();
+            }
+
+            return "No Result!";
+        }
+
+
+        private URL ConvertToUrl(String urlStr) {
+            try {
+                URL url = new URL(urlStr);
+                URI uri = new URI(url.getProtocol(), url.getUserInfo(),
+                        url.getHost(), url.getPort(), url.getPath(),
+                        url.getQuery(), url.getRef());
+                url = uri.toURL();
+                return url;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        public String getJSON(String inputStr) {
+            URL url = ConvertToUrl(inputStr);
+            HttpURLConnection httpURLConnection = null;
+            int responseCode = -1;
+            StringBuilder stringBuilder = new StringBuilder();
+
+            try {
+                httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("GET");
+                httpURLConnection.setRequestProperty("X-API-KEY", "syz1992@gmail.com");
+                httpURLConnection.connect();
+
+                responseCode = httpURLConnection.getResponseCode();
+                //Log.e("responseCode",Integer.toString(responseCode));
+                if (responseCode == httpURLConnection.HTTP_OK) {
+                    InputStream inputStream = httpURLConnection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        stringBuilder.append(line);
+                    }
+                    inputStream.close();
+                }
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+                e.printStackTrace();
+
+            } finally {
+                httpURLConnection.disconnect();
+            }
+
+            return stringBuilder.toString();
+        }
+    }
+
 
 }
