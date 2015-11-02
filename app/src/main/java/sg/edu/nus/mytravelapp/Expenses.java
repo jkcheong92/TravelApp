@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 public class Expenses extends DrawerActivity {
     private static final String TAG = null;
-    private static String PARSE_CHANNEL = null;
+    private static String PARSE_CHANNEL = "P0";
     MyDB myDb;
 
     @Override
@@ -116,6 +116,7 @@ public class Expenses extends DrawerActivity {
                                 public void done(ParseException e) {
                                     if (e == null) {
                                         Log.e(TAG, "Expenses supervisor: Subscribing to channel " + PARSE_CHANNEL);
+                                        Toast.makeText(Expenses.this, "Success in pairing devices!", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Log.e("com.parse.push", "failed to subscribe for push", e);
                                     }
@@ -253,15 +254,15 @@ public class Expenses extends DrawerActivity {
 
         // TODO: Send broadcast message when exceeded budget
         if (foodExpenses > foodBudget)
-            Toast.makeText(Expenses.this, "You have exceeded your food budget!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Expenses.this, "You have exceeded your food budget!", Toast.LENGTH_SHORT).show();
         if (travelExpenses > travelBudget)
-            Toast.makeText(Expenses.this, "You have exceeded your travel budget!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Expenses.this, "You have exceeded your travel budget!", Toast.LENGTH_SHORT).show();
         if (accomodationExpenses > accomodationBudget)
-            Toast.makeText(Expenses.this, "You have exceeded your accomodation budget!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Expenses.this, "You have exceeded your accomodation budget!", Toast.LENGTH_SHORT).show();
         if (playExpenses > playBudget)
-            Toast.makeText(Expenses.this, "You have exceeded your play budget!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Expenses.this, "You have exceeded your play budget!", Toast.LENGTH_SHORT).show();
         if (shoppingExpenses > shoppingBudget)
-            Toast.makeText(Expenses.this, "You have exceeded your shopping budget!", Toast.LENGTH_LONG).show();
+            Toast.makeText(Expenses.this, "You have exceeded your shopping budget!", Toast.LENGTH_SHORT).show();
 
         if (totalExpenses > totalBudget) {
             sendBroadcastMessage();
