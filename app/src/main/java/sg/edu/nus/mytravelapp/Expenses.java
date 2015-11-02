@@ -4,14 +4,13 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
-import android.telephony.TelephonyManager;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,13 +20,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.Parse;
 import com.parse.ParseException;
-import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.SaveCallback;
-
-import android.provider.Settings.Secure;
 
 import java.util.ArrayList;
 
@@ -115,6 +110,7 @@ public class Expenses extends DrawerActivity {
                                 @Override
                                 public void done(ParseException e) {
                                     if (e == null) {
+                                        Toast.makeText(Expenses.this, "Expenses supervisor :  Device Paired!",Toast.LENGTH_LONG).show();
                                         Log.e(TAG, "Expenses supervisor: Subscribing to channel " + PARSE_CHANNEL);
                                     } else {
                                         Log.e("com.parse.push", "failed to subscribe for push", e);

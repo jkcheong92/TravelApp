@@ -63,10 +63,12 @@ function locateMe() {
         });
 
 
+
         deleteMarkers();
         markers2.push(marker);
         setMapOnAll(map);
-        map.setCenter(pos);
+        map.panTo(pos);
+        map.setZoom(15);
     })
 }
 

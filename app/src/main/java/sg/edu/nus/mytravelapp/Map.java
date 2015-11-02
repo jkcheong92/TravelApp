@@ -55,9 +55,6 @@ public class Map extends DrawerActivity {
             map.loadUrl("javascript:locateMe()");
 
         }
-        else if (id == R.id.action_accom){
-            map.loadUrl("javascript:getAccommodation()");
-        }
 
         return super.onOptionsItemSelected(item);
     }
